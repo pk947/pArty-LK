@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party LK | Corporate Elite Confection & Event Dashboard</title>
+    <link rel="icon" type="image/png" href="party.png">
+    <!-- Google Fonts for High-End Corporate Luxury Appeal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External Library dependencies for Client-Side PDF Manifestations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        /* --- ULTRA-PREMIUM CORPORATE BUSINESS THEME --- */
+        :root {
+            --executive-black: #0d0d0d;   /* Deep obsidian luxury black */
+            --business-slate: #1a1e24;    /* Sharp corporate dark background */
+            --premium-gold: #c5a880;      /* Muted brushed bronze/gold */
+            --bright-gold: #e5c158;       /* High-contrast gold accents */
+            --text-pure: #ffffff;
+            --text-muted: #9aa0a6;
+            --pure-white: #ffffff;
+            --border-dark: #2a313c;
+            --accent-green: #2ecc71;      /* Crisp financial success green */
+            --accent-red: #e74c3c;
+            --transition-sharp: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--executive-black);
+            color: var(--text-pure);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-logo {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+        }
+
+        /* --- UTILITY & RESPONSIVE LIQUID CORE --- */
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- PREMIUM HEADER --- */
+        .top-bar {
+            background-color: var(--business-slate);
+            color: var(--premium-gold);
+            text-align: center;
+            padding: 0.6rem;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        header {
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--pure-white);
+        }
+
+        .brand-logo h1 span {
+            color: var(--premium-gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: var(--transition-sharp);
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--premium-gold);
+            border-bottom-color: var(--premium-gold);
+        }
+
+        .btn-portal-trigger {
+            background: none;
+            border: 1px solid var(--border-dark);
+            color: var(--premium-gold);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition-sharp);
+        }
+
+        .btn-portal-trigger:hover {
+            background-color: var(--premium-gold);
+            color: var(--executive-black);
+            border-color: var(--premium-gold);
+        }
+
+        /* --- HERO SPLENDOR WITH VIBRANT ANIMATED BACKDROP --- */
+        .hero {
+            position: relative;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 1px solid var(--border-dark);
+            background-color: var(--executive-black);
+            overflow: hidden;
+        }
+
+        .hero-canvas-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-overlay-shade {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.1), #0d0d0d);
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 3.2rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: var(--pure-white);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+            z-index: 3;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--premium-gold);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            z-index: 3;
+        }
+
+        /* --- CATEGORIES TAB FILTER MENU --- */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--business-slate);
+            border: 1px solid var(--border-dark);
+            color: var(--text-muted);
+            padding: 0.7rem 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: var(--transition-sharp);
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            border-color: var(--premium-gold);
+            color: var(--premium-gold);
+            background: rgba(197, 168, 128, 0.05);
+        }
+
+        /* --- GRID AND CARDS --- */
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 2rem 0;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--pure-white);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background-color: var(--premium-gold);
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .item-card {
+            background: var(--business-slate);
+            border: 1px solid var(--border-dark);
+            transition: var(--transition-sharp);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--premium-gold);
+        }
+
+        .img-container {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+            background-color: #11141a;
+        }
+
+        .item-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-sharp);
+            filter: grayscale(15%) brightness(90%);
+        }
+
+        .item-card:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        .item-details {
+            padding: 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .item-card h3 {
+            font-size: 1.1rem;
+            color: var(--pure-white);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .price {
+            color: var(--premium-gold);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- SYSTEM BUTTONS --- */
+        .btn-primary {
+            background: none;
+            color: var(--pure-white);
+            border: 1px solid var(--premium-gold);
+            padding: 0.8rem 1.5rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-sharp);
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--premium-gold);
+            color: var(--executive-black);
+        }
+
+        .btn-checkout {
+            background-color: var(--premium-gold);
+            color: var(--executive-black);
+            border-color: var(--premium-gold);
+        }
+        
+        .btn-checkout:hover {
+            background: none;
+            color: var(--premium-gold);
+        }
+
+        .btn-action {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            background: none;
+            border: 1px solid var(--border-dark);
+            color: var(--text-pure);
+            margin-right: 5px;
+            transition: var(--transition-sharp);
+        }
+        .btn-edit { border-color: var(--premium-gold); color: var(--premium-gold); }
+        .btn-edit:hover { background: var(--premium-gold); color: var(--executive-black); }
+        .btn-delete { border-color: var(--accent-red); color: var(--accent-red); }
+        .btn-delete:hover { background: var(--accent-red); color: var(--text-pure); }
+        .status-badge {
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+        .status-pending { background-color: #f39c12; color: #fff; }
+        .status-done { background-color: var(--accent-green); color: #fff; }
+
+        /* --- PORTFOLIO GALLERY SHOWCASE --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-card {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border: 1px solid var(--border-dark);
+        }
+
+        .portfolio-card img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: var(--transition-sharp);
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(13,13,13,0.95), rgba(13,13,13,0));
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            transition: var(--transition-sharp);
+        }
+
+        .portfolio-overlay h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--bright-gold);
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .portfolio-overlay p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- INFO GRID (ABOUT & LOCATION) --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin: 4rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        /* --- RETAIL SPLIT LAYOUT --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1.5fr;
+            gap: 2.5rem;
+            margin-top: 4rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            background: var(--business-slate);
+            padding: 2.5rem;
+            border: 1px solid var(--border-dark);
+        }
+
+        .panel h2 {
+            font-size: 1.4rem;
+            color: var(--premium-gold);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 0.75rem;
+        }
+
+        /* --- CART & FORM CONTROLS --- */
+        .cart-list { list-style: none; }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-dark);
+            font-size: 0.95rem;
+        }
+
+        .cart-item .remove-btn {
+            background: none;
+            border: none;
+            color: var(--accent-red);
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .empty-msg {
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 1rem 0;
+        }
+
+        .total-display {
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: right;
+            margin: 1.5rem 0;
+            color: var(--pure-white);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-dark);
+            font-size: 0.95rem;
+            background-color: var(--executive-black);
+            color: var(--pure-white);
+            transition: var(--transition-sharp);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--premium-gold);
+        }
+
+        .form-group input[type="file"] {
+            padding: 0.6rem;
+            cursor: pointer;
+        }
+
+        .image-preview-slot {
+            margin-top: 0.5rem;
+            width: 100%;
+            height: 120px;
+            border: 1px dashed var(--border-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* --- BANK DETAIL PANEL --- */
+        .bank-details-box {
+            background: #0d1117;
+            border: 1px dashed var(--premium-gold);
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .bank-details-box h4 {
+            color: var(--bright-gold);
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+        }
+        .bank-details-box p {
+            font-size: 0.8rem;
+            color: var(--text-pure);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+        }
+        .bank-details-box p span { color: var(--text-muted); }
+
+        /* --- OWNER PORTAL --- */
+        .owner-portal-wrapper {
+            display: none; 
+            background-color: #090b0e;
+            border: 2px solid var(--premium-gold);
+            margin: 4rem 0;
+            padding: 3rem;
+        }
+
+        .portal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .portal-header h2 {
+            color: var(--bright-gold);
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background: var(--business-slate);
+            border: 1px solid var(--border-dark);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-card h4 {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card .value {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .metric-card .value.profit {
+            color: var(--accent-green);
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: 2.5rem;
+        }
+
+        @media(max-width: 900px) {
+            .analytics-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Owner Table System */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .data-table th, .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .data-table th {
+            color: var(--premium-gold);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        /* --- AUTH MODAL --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background: var(--business-slate);
+            border: 1px solid var(--premium-gold);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .modal-box h3 {
+            margin-bottom: 1.5rem;
+            color: var(--premium-gold);
+        }
+
+        /* --- GOOGLE SHEET EMBED PANEL --- */
+        .sheet-container {
+            width: 100%;
+            background: #fff;
+            padding: 5px;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .sheet-container table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #333;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .sheet-container th, .sheet-container td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .sheet-container th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #050505;
+            color: var(--text-muted);
+            padding: 4rem 0 2rem 0;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h4 {
+            color: var(--pure-white);
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-dark);
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">EXECUTIVE PATISSERIE • GOURMET CATERING MANAGEMENT</div>
+
+    <header>
+        <div class="container header-main">
+            <div class="brand-logo">
+                <h1>PARTY <span>LK</span></h1>
+            </div>
+            <nav>
+                <a href="#shop" class="active">Collections</a>
+                <a href="#work-portfolio">Our Work</a>
+                <a href="#about-location">Contact</a>
+                <button class="btn-portal-trigger" onclick="toggleAuthModal(true)">Owner Portal</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <canvas id="hero-animation-layer" class="hero-canvas-bg"></canvas>
+        <div class="hero-overlay-shade"></div>
+        
+        <h2>Corporate Elite Confections & Decor</h2>
+        <p>A Premium Business Approach to Celebration Planning</p>
+    </div>
+
+    <div class="container">
+        
+        <!-- OWNER PORTAL INTERFACE -->
+        <section id="owner-portal" class="owner-portal-wrapper">
+            <div class="portal-header">
+                <h2>Executive Ledger & Operations</h2>
+                <button class="btn-portal-trigger" style="color:var(--accent-red); border-color:var(--accent-red);" onclick="logoutPortal()">Lock Dashboard</button>
+            </div>
+
+            <!-- Financial Scoreboard -->
+            <div class="metrics-row">
+                <div class="metric-card">
+                    <h4>Direct Order Sales</h4>
+                    <div class="value" id="metrics-order-sales">LKR 0.00</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Auxiliary Daily Sales</h4>
+                    <div class="value" id="metrics-aux-sales">LKR 0.00</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Total Combined Revenue</h4>
+                    <div class="value" id="metrics-total-sales" style="color: var(--premium-gold);">LKR 0.00</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Total Operational Cost</h4>
+                    <div class="value" id="metrics-total-cost" style="color: var(--accent-red);">LKR 0.00</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Net Daily Profit</h4>
+                    <div class="value profit" id="metrics-net-profit">LKR 0.00</div>
+                </div>
+            </div>
+
+            <!-- SECURED ACCESS WORK PORTFOLIO CREATION COMPONENT (OWNER VISIBLE ONLY) -->
+            <div class="panel" style="margin-bottom: 3rem; background: #12161c; border: 1px solid var(--premium-gold);">
+                <h3 style="font-size: 1rem; color: var(--premium-gold); margin-bottom: 1rem; text-transform: uppercase;">Append Custom Achievement Portfolio Image (Owner Verification Mandatory)</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: flex-end;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Title Heading</label>
+                        <input type="text" id="portfolio-title-input" placeholder="e.g., Anniversary Gateau Elite">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Short Description</label>
+                        <input type="text" id="portfolio-desc-input" placeholder="e.g., Crafted with local fine ingredients">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Select Work Image</label>
+                        <input type="file" id="portfolio-file-input" accept="image/*">
+                    </div>
+                    <button class="btn-primary" onclick="appendCustomPortfolioCard()" style="background: var(--premium-gold); color: var(--executive-black);">Publish Card</button>
+                </div>
+            </div>
+
+            <div class="analytics-grid">
+                <!-- Operations Ledger Logging Form & Sheet Management -->
+                <div class="panel">
+                    <h2>Log Daily Ledger Changes</h2>
+                    <form onsubmit="handleManualFinancials(event)">
+                        <div class="form-group">
+                            <label for="manual-sales">Add Daily/Auxiliary Sales (LKR)</label>
+                            <input type="number" step="0.01" id="manual-sales" placeholder="Update layout revenue intake">
+                        </div>
+                        <div class="form-group">
+                            <label for="manual-cost">Add Daily Operational Cost (LKR)</label>
+                            <input type="number" step="0.01" id="manual-cost" placeholder="Update processing/material costs">
+                        </div>
+                        <button type="submit" class="btn-primary" style="background:var(--premium-gold); color:var(--executive-black); margin-bottom: 2rem;">Commit Ledger Records</button>
+                    </form>
+
+                    <h2>Live Google Sheet System</h2>
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.5rem;">Synchronized tracking ledger for executive compilation records.</p>
+                    <div class="sheet-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="background:#e8f5e9; color:#2e7d32;">Total Revenue</th>
+                                    <th style="background:#ffebee; color:#c62828;">Total Costs</th>
+                                    <th style="background:#e3f2fd; color:#1565c0;">Net Balanced Profits</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="sheet-income" style="font-weight:bold; color:#2ecc71;">LKR 0.00</td>
+                                    <td id="sheet-cost" style="font-weight:bold; color:#e74c3c;">LKR 0.00</td>
+                                    <td id="sheet-profit" style="font-weight:bold; color:#3498db;">LKR 0.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2 style="margin-top:2.5rem;">Manage Item Catalog</h2>
+                    <form onsubmit="handleCatalogManagement(event)">
+                        <input type="hidden" id="catalog-item-index" value="">
+                        <div class="form-group">
+                            <label for="catalog-item-category">Product Category Alignment</label>
+                            <select id="catalog-item-category" required>
+                                <option value="decorations">Decorations</option>
+                                <option value="flowers">Fresh Flowers</option>
+                                <option value="food">Food Decorations</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="catalog-item-name">Item Name</label>
+                            <input type="text" id="catalog-item-name" placeholder="e.g. Premium White Gateau" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="catalog-item-price">Price (LKR)</label>
+                            <input type="number" step="0.01" id="catalog-item-price" placeholder="e.g. 12000.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="catalog-item-file">Upload Product Display Image</label>
+                            <input type="file" id="catalog-item-file" accept="image/*" onchange="processLocalImageUpload(this, 'catalog-preview')">
+                            <div id="catalog-preview" class="image-preview-slot">No Image Selected</div>
+                        </div>
+                        <button type="submit" id="btn-catalog-submit" class="btn-primary" style="background:var(--bright-gold); color:var(--executive-black);">Add New Item</button>
+                        <button type="button" id="btn-catalog-cancel" class="btn-primary" style="display:none; margin-top: 10px; border-color: var(--text-muted); color: var(--text-muted);" onclick="resetCatalogForm()">Cancel Edit</button>
+                    </form>
+                    
+                    <div style="margin-top: 2rem; max-height: 250px; overflow-y: auto;">
+                        <h4>Current Active Catalog Items</h4>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="owner-catalog-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Customer Live Bookings Logs & Payment Tracking Core -->
+                <div class="panel" style="overflow-x: auto;">
+                    <h2>Incoming Payments & Orders Log</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Ref ID</th>
+                                <th>Client Profile</th>
+                                <th>Cart Items</th>
+                                <th>Total Due</th>
+                                <th>Payment Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="owner-orders-log">
+                            <tr>
+                                <td colspan="6" class="empty-msg" style="text-align: center;">No client transactions logged for today's session.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECURE PORTAL GATEWAY MODAL -->
+        <div id="auth-modal" class="modal-overlay">
+            <div class="modal-box">
+                <h3>Executive Authentication</h3>
+                <div class="form-group">
+                    <label for="portal-username">Authorized Management Name</label>
+                    <input type="text" id="portal-username" placeholder="Enter administrative name">
+                </div>
+                <div class="form-group">
+                    <label for="portal-password">Security Password</label>
+                    <input type="password" id="portal-password" placeholder="Enter secure key">
+                </div>
+                <button class="btn-primary" onclick="verifyPortalAccess()" style="margin-bottom: 1rem;">Authenticate</button>
+                <button class="btn-primary" style="border-color:transparent; color:var(--text-muted);" onclick="toggleAuthModal(false)">Cancel</button>
+            </div>
+        </div>
+
+        <!-- CLIENT RETAIL INTERFACE WITH CATEGORIZED SHOP TITLES -->
+        <section id="shop">
+            <div class="section-title">
+                <h2>Signature Store Floor</h2>
+            </div>
+
+            <div class="category-tabs">
+                <button class="tab-btn active" onclick="switchCategory('all', this)">All Collections</button>
+                <button class="tab-btn" onclick="switchCategory('decorations', this)">Decorations</button>
+                <button class="tab-btn" onclick="switchCategory('flowers', this)">Fresh Flowers</button>
+                <button class="tab-btn" onclick="switchCategory('food', this)">Food Decorations</button>
+            </div>
+            
+            <div id="items-grid-container" class="items-grid">
+                <!-- Rendered dynamically by JS Engine -->
+            </div>
+        </section>
+
+        <!-- OUR WORK PORTFOLIO GALLERY SHOWCASE SECTION -->
+        <section id="work-portfolio" style="margin-top: 5rem;">
+            <div class="section-title">
+                <h2>Our Work & Crafted Masterpieces</h2>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: -1rem; letter-spacing: 1px;">A dynamic display of previous high-end cake collections and theme arrangements</p>
+            </div>
+
+            <div class="portfolio-grid" id="portfolio-display-grid">
+                <div class="portfolio-card">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600" alt="Baking Excellence Artwork">
+                    <div class="portfolio-overlay">
+                        <h4>Bespoke Cake Baking & Patisserie</h4>
+                        <p>Luxury tiered cakes, celebration gateaus, and custom flavor profiles crafted from scratch.</p>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600" alt="Bespoke Design Production">
+                    <div class="portfolio-overlay">
+                        <h4>Premium Event Decorations</h4>
+                        <p>Elegant backdrop setups, luxury staging layouts, and space structural transformations.</p>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600" alt="Floral Configuration Elements">
+                    <div class="portfolio-overlay">
+                        <h4>Botanical Layouts & Accents</h4>
+                        <p>Sourcing fresh floral arrangement aesthetics suited perfectly to elite executive standards.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOUBLE INTERACTIVE SECTIONS & INFO GRID -->
+        <div class="dashboard-grid">
+            <section id="cart-section" class="panel">
+                <h2>Your Patisserie Selection</h2>
+                <ul id="cart-items" class="cart-list">
+                    <p id="empty-cart-msg" class="empty-msg">Your shopping cart is currently empty.</p>
+                </ul>
+                <div class="total-display">Estimated Total: LKR <span id="cart-total">0.00</span></div>
+                
+                <!-- CUSTOMER VISIBLE WIRE TRANSFER BANK ACCOUNT CARD -->
+                <div class="bank-details-box">
+                    <h4>Direct Bank Money Transfer Details</h4>
+                    <p><span>Bank:</span> Commercial Bank of Ceylon</p>
+                    <p><span>Branch:</span> Colombo Corporate Branch</p>
+                    <p><span>Account Name:</span> Party LK Event Logistics</p>
+                    <p><span>Account Number:</span> 10004829381</p>
+                    <p style="font-size: 0.72rem; color: var(--premium-gold); margin-top: 0.5rem; text-transform: uppercase;">
+                        * Transfer total value and submit your Reference ID to support.
+                    </p>
+                </div>
+
+                <button class="btn-primary btn-checkout" onclick="checkout()">Proceed to Secure Checkout</button>
+            </section>
+
+            <section id="account" class="panel">
+                <h2>Patron Event Profile Settings</h2>
+                <form id="account-form">
+                    <div class="form-group">
+                        <label for="username">Customer Full Name</label>
+                        <input type="text" id="username" value="Alka Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" value="alka@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-date">Planned Event Date</label>
+                        <input type="date" id="event-date" required>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        <!-- ABOUT & LOCATION SECTION -->
+        <div class="info-grid" id="about-location">
+            <div class="panel">
+                <h2>About Our Logistics Core</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+                    Party LK merges elite confectionery production with tactical corporate event management. Every plan handles customized menu creation, luxury flower arrangements, and space transformations effortlessly under single-point leadership.
+                </p>
+                <p style="color: var(--premium-gold); font-size: 0.9rem; font-weight: 600; font-family: 'Cinzel', serif;">
+                    CRAFTING UNFORGETTABLE CELEBRATION LANDMARKS SINCE 2026.
+                </p>
+            </div>
+            <div class="panel">
+                <h2>Operational Headquarters</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.5rem;"><strong>Flagship Showroom Address:</strong></p>
+                <p style="color: var(--pure-white); font-size: 0.95rem; margin-bottom: 1.5rem; letter-spacing: 0.5px;">
+                    Elite Corporate Hub Level 4, Colombo, Sri Lanka
+                </p>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">
+                    * Available globally across major corporate circles for premium delivery assignments and localized setup operations.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>About Party LK</h4>
+                    <p>Bringing premium corporate catering execution, luxury designs, and elite-tier recipes to your special corporate and personal landmarks.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Corporate Flagship</h4>
+                    <p>Central Luxury Hub & Showroom, Colombo</p>
+                    <p>Communications Line: +1 (555) 019-2834</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Hours of Operation</h4>
+                    <p>Mon - Sat: 8:00 AM - 8:00 PM</p>
+                    <p>Sunday: 9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Party LK Patisserie & Corporate Event Logistics. Private System Layer Integrated.
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE BUSINESS ENGINE LOGIC -->
+    <script>
+        let products = [
+            { id: 1, category: 'food', name: 'Chocolate Fudge Gateau', price: 7500.00, img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600' },
+            { id: 2, category: 'food', name: 'Strawberry Luxury Delight', price: 9000.00, img: 'https://images.unsplash.com/photo-1535141192574-5d4897c13636?w=600' },
+            { id: 3, category: 'decorations', name: 'Assorted Party Cupcakes (6pc)', price: 4500.00, img: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600' },
+            { id: 4, category: 'decorations', name: 'Themed Celebration Balloons', price: 3000.00, img: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600' },
+            { id: 5, category: 'flowers', name: 'Royal White Lily Bouquet', price: 13500.00, img: 'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600' }
+        ];
+
+        let currentActiveCategory = 'all';
+        let operationalUploadedBase64String = "";
+        let cart = [];
+        let retailTotal = 0;
+
+        let executiveState = {
+            authenticated: false,
+            customerOrdersRevenue: 0,
+            auxiliarySales: 0,
+            operationalCosts: 0,
+            loggedOrders: []
+        };
+
+        function triggerHeroCanvasAnimationLoop() {
+            const canvas = document.getElementById('hero-animation-layer');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvasElement() {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+            }
+            resizeCanvasElement();
+            window.addEventListener('resize', resizeCanvasElement);
+
+            const particles = [];
+            const colors = ['rgba(231, 76, 60, 0.45)', 'rgba(52, 152, 219, 0.45)', 'rgba(46, 204, 113, 0.45)', 'rgba(241, 196, 15, 0.45)', 'rgba(155, 89, 182, 0.45)'];
+
+            for(let i = 0; i < 40; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 20 + 10,
+                    dx: (Math.random() - 0.5) * 1.5,
+                    dy: (Math.random() - 0.5) * 1.5,
+                    color: colors[Math.floor(Math.random() * colors.length)]
+                });
+            }
+
+            function animate() {
+                ctx.fillStyle = 'rgba(13, 13, 13, 0.08)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.shadowBlur = 30;
+                    ctx.shadowColor = p.color;
+                    ctx.fill();
+
+                    p.x += p.dx;
+                    p.y += p.dy;
+
+                    if(p.x - p.radius < 0 || p.x + p.radius > canvas.width) p.dx *= -1;
+                    if(p.y - p.radius < 0 || p.y + p.radius > canvas.height) p.dy *= -1;
+                });
+
+                ctx.shadowBlur = 0;
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        function renderStoreCatalog() {
+            const gridContainer = document.getElementById('items-grid-container');
+            gridContainer.innerHTML = '';
+            
+            const filteredProducts = products.filter(p => currentActiveCategory === 'all' || p.category === currentActiveCategory);
+
+            if (filteredProducts.length === 0) {
+                gridContainer.innerHTML = `<p class="empty-msg" style="grid-column: 1/-1; text-align: center;">No dynamic assets mapped under this selected tier yet.</p>`;
+                return;
+            }
+
+            filteredProducts.forEach((product) => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div class="img-container">
+                        <img src="${product.img || 'https://images.unsplash.com/photo-1535141192574-5d4897c13636?w=600'}" alt="${product.name}">
+                    </div>
+                    <div class="item-details">
+                        <h3>${product.name}</h3>
+                        <p class="price">LKR ${product.price.toFixed(2)}</p>
+                        <button class="btn-primary" onclick="addToCart('${product.name.replace(/'/g, "\\'")}', ${product.price})">Add To Order</button>
+                    </div>
+                `;
+                gridContainer.appendChild(card);
+            });
+        }
+
+        function switchCategory(categorySelection, elementPointer) {
+            currentActiveCategory = categorySelection;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            elementPointer.classList.add('active');
+            renderStoreCatalog();
+        }
+
+        function processLocalImageUpload(inputPointer, targetedPreviewID) {
+            const file = inputPointer.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    operationalUploadedBase64String = event.target.result;
+                    const previewZone = document.getElementById(targetedPreviewID);
+                    previewZone.innerText = "";
+                    previewZone.style.backgroundImage = `url('${operationalUploadedBase64String}')`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        /* --- OWNER VERIFICATION SECURED PORTFOLIO ASSIGNMENTS --- */
+        function appendCustomPortfolioCard() {
+            if(!executiveState.authenticated) {
+                alert("Security Action Denied: Only verified administrative owners can adjust achievement work images.");
+                return;
+            }
+
+            const title = document.getElementById('portfolio-title-input').value || "Bespoke Production Assignment";
+            const desc = document.getElementById('portfolio-desc-input').value || "Elite deployment execution sequence completed.";
+            const fileInput = document.getElementById('portfolio-file-input');
+            
+            if(!fileInput.files[0]) {
+                alert("Please upload a local image file to register this achievement card.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageBase64 = e.target.result;
+                const grid = document.getElementById('portfolio-display-grid');
+                const card = document.createElement('div');
+                card.className = 'portfolio-card';
+                card.innerHTML = `
+                    <img src="${imageBase64}" alt="${title}">
+                    <div class="portfolio-overlay">
+                        <h4>${title}</h4>
+                        <p>${desc}</p>
+                    </div>
+                `;
+                grid.insertBefore(card, grid.firstChild);
+                
+                document.getElementById('portfolio-title-input').value = "";
+                document.getElementById('portfolio-desc-input').value = "";
+                fileInput.value = "";
+                alert("Portfolio Card added dynamically!");
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        function addToCart(itemName, price) {
+            cart.push({ name: itemName, price: price });
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            cartItemsContainer.innerHTML = "";
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = "<p id='empty-cart-msg' class='empty-msg'>Your shopping cart is currently empty.</p>";
+                cartTotal.innerText = "0.00";
+                return;
+            }
+
+            retailTotal = 0;
+            cart.forEach((item, index) => {
+                retailTotal += item.price;
+                const li = document.createElement('li');
+                li.className = 'cart-item';
+                li.innerHTML = `
+                    <span><strong>${item.name}</strong> <br><small style="color: var(--premium-gold);">LKR ${item.price.toFixed(2)}</small></span>
+                    <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                `;
+                cartItemsContainer.appendChild(li);
+            });
+
+            cartTotal.innerText = retailTotal.toFixed(2);
+        }
+
+        function checkout() {
+            if(cart.length === 0) {
+                alert("Your cart is empty. Please select premium assets before checkout.");
+                return;
+            }
+
+            const clientName = document.getElementById('username').value || "Anonymous Client";
+            const clientEmail = document.getElementById('email').value || "No Email Provided";
+            const eventDate = document.getElementById('event-date').value || "Unscheduled";
+            const orderedItemsText = cart.map(item => item.name).join(', ');
+            const uniqueReferenceID = "PTY-" + Math.floor(100000 + Math.random() * 900000);
+
+            executiveState.customerOrdersRevenue += retailTotal;
+            executiveState.loggedOrders.push({
+                refID: uniqueReferenceID,
+                name: clientName,
+                email: clientEmail,
+                date: eventDate,
+                items: orderedItemsText,
+                paid: retailTotal,
+                status: 'Pending' // Initial state assignment default to Pending
+            });
+
+            recalculateFinancialLedger();
+            updateOwnerTableUI();
+            generateInvoicePDFManifest(uniqueReferenceID, clientName, clientEmail, eventDate, cart, retailTotal);
+
+            alert(`Thank you for booking with Party LK!\nPlease make a transfer of LKR ${retailTotal.toFixed(2)} to the banking details provided.\nInvoice Reference ID: ${uniqueReferenceID}\nYour transactional ledger PDF statement has downloaded successfully.`);
+            
+            cart = [];
+            updateCartUI();
+        }
+
+        function generateInvoicePDFManifest(refID, name, email, date, selectedItems, netTotal) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
+
+            doc.setFillColor(13, 13, 13);
+            doc.rect(0, 0, 210, 40, "F");
+
+            doc.setTextColor(197, 168, 128);
+            doc.setFont("serif", "bold");
+            doc.setFontSize(22);
+            doc.text("PARTY LK EXECUTIVE CATERING", 15, 25);
+
+            doc.setTextColor(154, 160, 166);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9);
+            doc.text("OFFICIAL TRANSACTIONS STATEMENT", 15, 32);
+
+            doc.setTextColor(13, 13, 13);
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "bold");
+            doc.text(`REFERENCE NUMBER: ${refID}`, 15, 55);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Account Name: ${name}`, 15, 63);
+            doc.text(`Patron Communications: ${email}`, 15, 70);
+            doc.text(`Scheduled Deployment Date: ${date}`, 15, 77);
+
+            doc.setDrawColor(42, 49, 60);
+            doc.setLineWidth(0.3);
+            doc.line(15, 85, 195, 85);
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Selected Items Catalog Mapping", 15, 93);
+            doc.setFont("helvetica", "normal");
+
+            let formattingRowPositionY = 102;
+            selectedItems.forEach((item, idx) => {
+                if(formattingRowPositionY > 260) { doc.addPage(); formattingRowPositionY = 20; }
+                doc.text(`${idx + 1}. ${item.name}`, 20, formattingRowPositionY);
+                doc.text(`LKR ${item.price.toFixed(2)}`, 170, formattingRowPositionY, { align: "right" });
+                formattingRowPositionY += 8;
+            });
+
+            doc.line(15, formattingRowPositionY + 2, 195, formattingRowPositionY + 2);
+            
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(13);
+            doc.text("Total Settled Gross Liability:", 120, formattingRowPositionY + 12);
+            doc.setTextColor(46, 204, 113); 
+            doc.text(`LKR ${netTotal.toFixed(2)}`, 195, formattingRowPositionY + 12, { align: "right" });
+
+            doc.setTextColor(154, 160, 166);
+            doc.setFontSize(8);
+            doc.setFont("helvetica", "italic");
+            doc.text("Thank you for your business. Generated securely via Party LK Logistics Architecture.", 105, 285, { align: "center" });
+
+            doc.save(`Invoice-${refID}.pdf`);
+        }
+
+        function toggleAuthModal(show) {
+            document.getElementById('auth-modal').style.display = show ? 'flex' : 'none';
+        }
+
+        function verifyPortalAccess() {
+            const nameField = document.getElementById('portal-username').value;
+            const passwordField = document.getElementById('portal-password').value;
+
+            if (nameField.toLowerCase() === "alka" && passwordField === "alka2026") {
+                executiveState.authenticated = true;
+                document.getElementById('owner-portal').style.display = 'block';
+                toggleAuthModal(false);
+                recalculateFinancialLedger();
+                updateOwnerTableUI();
+                renderCatalogManagementList();
+                
+                document.getElementById('owner-portal').scrollIntoView({ behavior: 'smooth' });
+                
+                document.getElementById('portal-username').value = "";
+                document.getElementById('portal-password').value = "";
+            } else {
+                alert("Access Denied: Invalid Administrative Signature or Token.");
+            }
+        }
+
+        function logoutPortal() {
+            executiveState.authenticated = false;
+            document.getElementById('owner-portal').style.display = 'none';
+        }
+
+        function handleManualFinancials(event) {
+            event.preventDefault();
+            const salesInput = document.getElementById('manual-sales');
+            const costInput = document.getElementById('manual-cost');
+
+            const additionalSales = parseFloat(salesInput.value) || 0;
+            const additionalCost = parseFloat(costInput.value) || 0;
+
+            executiveState.auxiliarySales += additionalSales;
+            executiveState.operationalCosts += additionalCost;
+
+            recalculateFinancialLedger();
+            
+            salesInput.value = "";
+            costInput.value = "";
+        }
+
+        function renderCatalogManagementList() {
+            const catalogList = document.getElementById('owner-catalog-list');
+            catalogList.innerHTML = '';
+            products.forEach((product, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${product.name}</strong> <small style="color:var(--premium-gold);">(${product.category})</small></td>
+                    <td>LKR ${product.price.toFixed(2)}</td>
+                    <td>
+                        <button class="btn-action btn-edit" onclick="editCatalogItem(${index})">Edit</button>
+                        <button class="btn-action btn-delete" onclick="deleteCatalogItem(${index})">Remove</button>
+                    </td>
+                `;
+                catalogList.appendChild(tr);
+            });
+        }
+
+        function handleCatalogManagement(event) {
+            event.preventDefault();
+            const index = document.getElementById('catalog-item-index').value;
+            const category = document.getElementById('catalog-item-category').value;
+            const name = document.getElementById('catalog-item-name').value;
+            const price = parseFloat(document.getElementById('catalog-item-price').value) || 0;
+            const img = operationalUploadedBase64String || 'https://images.unsplash.com/photo-1535141192574-5d4897c13636?w=600';
+
+            if (index === "") {
+                products.push({ id: Date.now(), category, name, price, img });
+            } else {
+                const originalImage = products[parseInt(index)].img;
+                products[parseInt(index)] = { id: products[parseInt(index)].id, category, name, price, img: operationalUploadedBase64String || originalImage };
+            }
+
+            resetCatalogForm();
+            renderStoreCatalog();
+            renderCatalogManagementList();
+        }
+
+        // TOGGLE SYSTEM FOR EXCLUSIVE OWNER PAYMENT VERIFICATION
+        function togglePaymentStatus(index) {
+            const order = executiveState.loggedOrders[index];
+            order.status = order.status === 'Pending' ? 'Done' : 'Pending';
+            updateOwnerTableUI();
+        }
+
+        function editCatalogItem(index) {
+            const product = products[index];
+            document.getElementById('catalog-item-index').value = index;
+            document.getElementById('catalog-item-category').value = product.category || 'decorations';
+            document.getElementById('catalog-item-name').value = product.name;
+            document.getElementById('catalog-item-price').value = product.price;
+            
+            const previewZone = document.getElementById('catalog-preview');
+            previewZone.innerText = "";
+            previewZone.style.backgroundImage = `url('${product.img}')`;
+            operationalUploadedBase64String = ""; 
+
+            document.getElementById('btn-catalog-submit').innerText = "Update Catalog Item";
+            document.getElementById('btn-catalog-cancel').style.display = "inline-block";
+        }
+
+        function deleteCatalogItem(index) {
+            if (confirm(`Are you sure you want to remove "${products[index].name}" from the store floor?`)) {
+                products.splice(index, 1);
+                renderStoreCatalog();
+                renderCatalogManagementList();
+            }
+        }
+
+        function resetCatalogForm() {
+            document.getElementById('catalog-item-index').value = "";
+            document.getElementById('catalog-item-name').value = "";
+            document.getElementById('catalog-item-price').value = "";
+            document.getElementById('catalog-item-file').value = "";
+            
+            const previewZone = document.getElementById('catalog-preview');
+            previewZone.style.backgroundImage = "none";
+            previewZone.innerText = "No Image Selected";
+            
+            operationalUploadedBase64String = "";
+
+            document.getElementById('btn-catalog-submit').innerText = "Add New Item";
+            document.getElementById('btn-catalog-cancel').style.display = "none";
+        }
+
+        function editCustomerOrder(index) {
+            const order = executiveState.loggedOrders[index];
+            const newName = prompt("Modify Customer Name:", order.name);
+            if (newName === null) return;
+            const newItems = prompt("Modify Items Ordered:", order.items);
+            if (newItems === null) return;
+            const newPaid = prompt("Modify Total Due (LKR):", order.paid);
+            if (newPaid === null) return;
+
+            executiveState.customerOrdersRevenue -= order.paid;
+            order.name = newName || "Anonymous Client";
+            order.items = newItems || "None";
+            order.paid = parseFloat(newPaid) || 0;
+            executiveState.customerOrdersRevenue += order.paid;
+
+            recalculateFinancialLedger();
+            updateOwnerTableUI();
+        }
+
+        function deleteCustomerOrder(index) {
+            if (confirm("Are you certain you want to strike this booking record clean from today's active ledger?")) {
+                executiveState.customerOrdersRevenue -= executiveState.loggedOrders[index].paid;
+                executiveState.loggedOrders.splice(index, 1);
+                
+                recalculateFinancialLedger();
+                updateOwnerTableUI();
+            }
+        }
+
+        function recalculateFinancialLedger() {
+            const totalRevenue = executiveState.customerOrdersRevenue + executiveState.auxiliarySales;
+            const netProfit = totalRevenue - executiveState.operationalCosts;
+
+            document.getElementById('metrics-order-sales').innerText = `LKR ${executiveState.customerOrdersRevenue.toFixed(2)}`;
+            document.getElementById('metrics-aux-sales').innerText = `LKR ${executiveState.auxiliarySales.toFixed(2)}`;
+            document.getElementById('metrics-total-sales').innerText = `LKR ${totalRevenue.toFixed(2)}`;
+            document.getElementById('metrics-total-cost').innerText = `LKR ${executiveState.operationalCosts.toFixed(2)}`;
+            
+            const profitNode = document.getElementById('metrics-net-profit');
+            profitNode.innerText = `LKR ${netProfit.toFixed(2)}`;
+            
+            if (netProfit >= 0) {
+                profitNode.style.color = "var(--accent-green)";
+            } else {
+                profitNode.style.color = "var(--accent-red)";
+            }
+
+            document.getElementById('sheet-income').innerText = `LKR ${totalRevenue.toFixed(2)}`;
+            document.getElementById('sheet-cost').innerText = `LKR ${executiveState.operationalCosts.toFixed(2)}`;
+            document.getElementById('sheet-profit').innerText = `LKR ${netProfit.toFixed(2)}`;
+        }
+
+        function updateOwnerTableUI() {
+            const tbody = document.getElementById('owner-orders-log');
+            tbody.innerHTML = "";
+
+            if(executiveState.loggedOrders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="empty-msg" style="text-align: center;">No client transactions logged for today's session.</td></tr>`;
+                return;
+            }
+
+            executiveState.loggedOrders.forEach((order, index) => {
+                const badgeClass = order.status === 'Pending' ? 'status-pending' : 'status-done';
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><small style="color:var(--bright-gold); font-weight:700;">${order.refID}</small></td>
+                    <td><strong>${order.name}</strong><br><small>${order.email}</small></td>
+                    <td>${order.items}</td>
+                    <td style="color: var(--accent-green); font-weight:700;">LKR ${order.paid.toFixed(2)}</td>
+                    <td><span class="status-badge ${badgeClass}">${order.status}</span></td>
+                    <td>
+                        <button class="btn-action btn-edit" style="border-color:#f39c12; color:#f39c12;" onclick="togglePaymentStatus(${index})">Toggle Status</button>
+                        <button class="btn-action btn-edit" onclick="editCustomerOrder(${index})">Edit</button>
+                        <button class="btn-action btn-delete" onclick="deleteCustomerOrder(${index})">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('event-date').valueAsDate = new Date();
+        renderStoreCatalog();
+        triggerHeroCanvasAnimationLoop();
+    </script>
+</body>
+</html>
