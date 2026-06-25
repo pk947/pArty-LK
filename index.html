@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Party LK | Corporate Elite Confection & Event Dashboard</title>
     <link rel="icon" type="image/png" href="party.png">
-    <!-- Google Fonts for High-End Corporate Luxury Appeal -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- External Library dependencies for Client-Side PDF Manifestations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
@@ -148,6 +146,7 @@
             border-bottom: 1px solid var(--border-dark);
             background-color: var(--executive-black);
             overflow: hidden;
+            padding: 0 1rem;
         }
 
         .hero-canvas-bg {
@@ -339,6 +338,7 @@
             border: 1px solid var(--border-dark);
             color: var(--text-pure);
             margin-right: 5px;
+            margin-bottom: 5px;
             transition: var(--transition-sharp);
         }
         .btn-edit { border-color: var(--premium-gold); color: var(--premium-gold); }
@@ -351,6 +351,7 @@
             text-transform: uppercase;
             font-weight: bold;
             border-radius: 3px;
+            display: inline-block;
         }
         .status-pending { background-color: #f39c12; color: #fff; }
         .status-done { background-color: var(--accent-green); color: #fff; }
@@ -358,7 +359,7 @@
         /* --- PORTFOLIO GALLERY SHOWCASE --- */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
@@ -409,10 +410,6 @@
             margin: 4rem 0;
         }
 
-        @media (max-width: 768px) {
-            .info-grid { grid-template-columns: 1fr; }
-        }
-
         /* --- RETAIL SPLIT LAYOUT --- */
         .dashboard-grid {
             display: grid;
@@ -420,10 +417,6 @@
             gap: 2.5rem;
             margin-top: 4rem;
             margin-bottom: 5rem;
-        }
-
-        @media (max-width: 900px) {
-            .dashboard-grid { grid-template-columns: 1fr; }
         }
 
         .panel {
@@ -562,6 +555,8 @@
             border-bottom: 1px solid var(--border-dark);
             padding-bottom: 1rem;
             margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .portal-header h2 {
@@ -604,16 +599,19 @@
             gap: 2.5rem;
         }
 
-        @media(max-width: 900px) {
-            .analytics-grid { grid-template-columns: 1fr; }
+        /* Owner Table System */
+        .table-responsive-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* Owner Table System */
         .data-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 1rem;
             font-size: 0.85rem;
+            min-width: 500px;
         }
 
         .data-table th, .data-table td {
@@ -638,6 +636,7 @@
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            padding: 1rem;
         }
 
         .modal-box {
@@ -661,7 +660,7 @@
             padding: 5px;
             border-radius: 4px;
             margin-top: 1.5rem;
-            overflow: hidden;
+            overflow-x: auto;
         }
         
         .sheet-container table {
@@ -670,6 +669,7 @@
             color: #333;
             font-size: 14px;
             font-family: Arial, sans-serif;
+            min-width: 400px;
         }
         
         .sheet-container th, .sheet-container td {
@@ -712,6 +712,68 @@
             font-size: 0.75rem;
             letter-spacing: 1px;
         }
+
+        /* --- COMPREHENSIVE LIQUID RESPONSIVE BREAKPOINTS --- */
+        @media (max-width: 900px) {
+            .dashboard-grid, .analytics-grid { 
+                grid-template-columns: 1fr; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            .header-main {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            nav {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+            }
+            .info-grid { 
+                grid-template-columns: 1fr; 
+                gap: 1.5rem;
+            }
+            .panel {
+                padding: 1.5rem;
+            }
+            .owner-portal-wrapper {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-logo h1 {
+                font-size: 1.4rem;
+            }
+            nav a {
+                font-size: 0.75rem;
+                letter-spacing: 1px;
+            }
+            .tab-btn {
+                padding: 0.5rem 1rem;
+            }
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            .metric-card {
+                padding: 1rem;
+            }
+            .metric-card .value {
+                font-size: 1.3rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -742,14 +804,17 @@
 
     <div class="container">
         
-        <!-- OWNER PORTAL INTERFACE -->
         <section id="owner-portal" class="owner-portal-wrapper">
             <div class="portal-header">
                 <h2>Executive Ledger & Operations</h2>
-                <button class="btn-portal-trigger" style="color:var(--accent-red); border-color:var(--accent-red);" onclick="logoutPortal()">Lock Dashboard</button>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn-portal-trigger" style="color:var(--bright-gold); border-color:var(--bright-gold);" onclick="generateLedgerBackupTXT()">Download plain text Backup (.TXT)</button>
+                    <button class="btn-portal-trigger" style="color:var(--premium-gold); border-color:var(--premium-gold);" onclick="generateLedgerBackupPDF()">Download Full Ledger Backup (PDF)</button>
+                    <button class="btn-portal-trigger" style="color:#e67e22; border-color:#e67e22;" onclick="clearDailySalesLedgerManually()">Zero Daily Operations</button>
+                    <button class="btn-portal-trigger" style="color:var(--accent-red); border-color:var(--accent-red);" onclick="logoutPortal()">Lock Dashboard</button>
+                </div>
             </div>
 
-            <!-- Financial Scoreboard -->
             <div class="metrics-row">
                 <div class="metric-card">
                     <h4>Direct Order Sales</h4>
@@ -773,9 +838,8 @@
                 </div>
             </div>
 
-            <!-- SECURED ACCESS WORK PORTFOLIO CREATION COMPONENT (OWNER VISIBLE ONLY) -->
             <div class="panel" style="margin-bottom: 3rem; background: #12161c; border: 1px solid var(--premium-gold);">
-                <h3 style="font-size: 1rem; color: var(--premium-gold); margin-bottom: 1rem; text-transform: uppercase;">Append Custom Achievement Portfolio Image (Owner Verification Mandatory)</h3>
+                <h3 style="font-size: 1rem; color: var(--premium-gold); margin-bottom: 1rem; text-transform: uppercase;">Append Custom Achievement Portfolio Image</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: flex-end;">
                     <div class="form-group" style="margin-bottom: 0;">
                         <label>Title Heading</label>
@@ -794,7 +858,6 @@
             </div>
 
             <div class="analytics-grid">
-                <!-- Operations Ledger Logging Form & Sheet Management -->
                 <div class="panel">
                     <h2>Log Daily Ledger Changes</h2>
                     <form onsubmit="handleManualFinancials(event)">
@@ -803,11 +866,40 @@
                             <input type="number" step="0.01" id="manual-sales" placeholder="Update layout revenue intake">
                         </div>
                         <div class="form-group">
+                            <label for="manual-sales-desc">Income Description</label>
+                            <input type="text" id="manual-sales-desc" placeholder="e.g., 5 cupcakes">
+                        </div>
+                        <div class="form-group">
                             <label for="manual-cost">Add Daily Operational Cost (LKR)</label>
                             <input type="number" step="0.01" id="manual-cost" placeholder="Update processing/material costs">
                         </div>
+                        <div class="form-group">
+                            <label for="manual-cost-desc">Cost Description</label>
+                            <input type="text" id="manual-cost-desc" placeholder="e.g., pay light bill">
+                        </div>
                         <button type="submit" class="btn-primary" style="background:var(--premium-gold); color:var(--executive-black); margin-bottom: 2rem;">Commit Ledger Records</button>
                     </form>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4>Auxiliary Logs Statement</h4>
+                        <div class="table-responsive-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="owner-manual-logs-tbody">
+                                    <tr>
+                                        <td colspan="4" class="empty-msg" style="text-align: center;">No auxiliary entries logged.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
                     <h2>Live Google Sheet System</h2>
                     <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.5rem;">Synchronized tracking ledger for executive compilation records.</p>
@@ -858,46 +950,48 @@
                         <button type="button" id="btn-catalog-cancel" class="btn-primary" style="display:none; margin-top: 10px; border-color: var(--text-muted); color: var(--text-muted);" onclick="resetCatalogForm()">Cancel Edit</button>
                     </form>
                     
-                    <div style="margin-top: 2rem; max-height: 250px; overflow-y: auto;">
+                    <div style="margin-top: 2rem;">
                         <h4>Current Active Catalog Items</h4>
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="owner-catalog-list"></tbody>
-                        </table>
+                        <div class="table-responsive-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="owner-catalog-list"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Customer Live Bookings Logs & Payment Tracking Core -->
-                <div class="panel" style="overflow-x: auto;">
+                <div class="panel">
                     <h2>Incoming Payments & Orders Log</h2>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Ref ID</th>
-                                <th>Client Profile</th>
-                                <th>Cart Items</th>
-                                <th>Total Due</th>
-                                <th>Payment Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="owner-orders-log">
-                            <tr>
-                                <td colspan="6" class="empty-msg" style="text-align: center;">No client transactions logged for today's session.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Ref ID</th>
+                                    <th>Client Profile</th>
+                                    <th>Cart Items</th>
+                                    <th>Total Due</th>
+                                    <th>Payment Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="owner-orders-log">
+                                <tr>
+                                    <td colspan="6" class="empty-msg" style="text-align: center;">No client transactions logged for today's session.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECURE PORTAL GATEWAY MODAL -->
         <div id="auth-modal" class="modal-overlay">
             <div class="modal-box">
                 <h3>Executive Authentication</h3>
@@ -914,7 +1008,6 @@
             </div>
         </div>
 
-        <!-- CLIENT RETAIL INTERFACE WITH CATEGORIZED SHOP TITLES -->
         <section id="shop">
             <div class="section-title">
                 <h2>Signature Store Floor</h2>
@@ -928,11 +1021,9 @@
             </div>
             
             <div id="items-grid-container" class="items-grid">
-                <!-- Rendered dynamically by JS Engine -->
-            </div>
+                </div>
         </section>
 
-        <!-- OUR WORK PORTFOLIO GALLERY SHOWCASE SECTION -->
         <section id="work-portfolio" style="margin-top: 5rem;">
             <div class="section-title">
                 <h2>Our Work & Crafted Masterpieces</h2>
@@ -948,7 +1039,7 @@
                     </div>
                 </div>
                 <div class="portfolio-card">
-                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600" alt="Bespoke Design Production">
+                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600" alt="B bespoke Design Production">
                     <div class="portfolio-overlay">
                         <h4>Premium Event Decorations</h4>
                         <p>Elegant backdrop setups, luxury staging layouts, and space structural transformations.</p>
@@ -964,7 +1055,6 @@
             </div>
         </section>
 
-        <!-- DOUBLE INTERACTIVE SECTIONS & INFO GRID -->
         <div class="dashboard-grid">
             <section id="cart-section" class="panel">
                 <h2>Your Patisserie Selection</h2>
@@ -973,7 +1063,6 @@
                 </ul>
                 <div class="total-display">Estimated Total: LKR <span id="cart-total">0.00</span></div>
                 
-                <!-- CUSTOMER VISIBLE WIRE TRANSFER BANK ACCOUNT CARD -->
                 <div class="bank-details-box">
                     <h4>Direct Bank Money Transfer Details</h4>
                     <p><span>Bank:</span> Commercial Bank of Ceylon</p>
@@ -1007,7 +1096,6 @@
             </section>
         </div>
 
-        <!-- ABOUT & LOCATION SECTION -->
         <div class="info-grid" id="about-location">
             <div class="panel">
                 <h2>About Our Logistics Core</h2>
@@ -1022,7 +1110,7 @@
                 <h2>Operational Headquarters</h2>
                 <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.5rem;"><strong>Flagship Showroom Address:</strong></p>
                 <p style="color: var(--pure-white); font-size: 0.95rem; margin-bottom: 1.5rem; letter-spacing: 0.5px;">
-                    Elite Corporate Hub Level 4, Colombo, Sri Lanka
+                    293, Ambulgama Rd, Panagoda.
                 </p>
                 <p style="color: var(--text-muted); font-size: 0.85rem;">
                     * Available globally across major corporate circles for premium delivery assignments and localized setup operations.
@@ -1041,13 +1129,15 @@
                 </div>
                 <div class="footer-column">
                     <h4>Corporate Flagship</h4>
-                    <p>Central Luxury Hub & Showroom, Colombo</p>
-                    <p>Communications Line: +1 (555) 019-2834</p>
+                    <p>293, Abulgama Rd, Panagoda</p>
+                    <p>Mobile: 0779690595</p>
+                    <p>Whatsapp: 0779690595</p>
                 </div>
                 <div class="footer-column">
                     <h4>Hours of Operation</h4>
-                    <p>Mon - Sat: 8:00 AM - 8:00 PM</p>
-                    <p>Sunday: 9:00 AM - 6:00 PM</p>
+                    <p>Mon - sun: 8:00 AM - 8:00 PM</p>
+                    <p>close on poya day</p>
+
                 </div>
             </div>
             <div class="footer-bottom">
@@ -1056,7 +1146,6 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE BUSINESS ENGINE LOGIC -->
     <script>
         let products = [
             { id: 1, category: 'food', name: 'Chocolate Fudge Gateau', price: 7500.00, img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600' },
@@ -1071,13 +1160,62 @@
         let cart = [];
         let retailTotal = 0;
 
-        let executiveState = {
+        // --- BROWSER LOCALSTORAGE LEDGER LOAD LOGIC ---
+        const savedExecutiveState = localStorage.getItem('party_lk_executive_ledger_state');
+        let executiveState = savedExecutiveState ? JSON.parse(savedExecutiveState) : {
             authenticated: false,
             customerOrdersRevenue: 0,
             auxiliarySales: 0,
             operationalCosts: 0,
-            loggedOrders: []
+            loggedOrders: [],
+            manualHistory: [], 
+            lastResetDateString: ""
         };
+
+        if (!executiveState.manualHistory) {
+            executiveState.manualHistory = [];
+        }
+        if (!executiveState.lastResetDateString) {
+            executiveState.lastResetDateString = "";
+        }
+
+        // For absolute security consistency, initialize authentication state to false on complete context reloads
+        executiveState.authenticated = false;
+
+        // --- BROWSER LOCALSTORAGE LEDGER SAVE LOGIC ---
+        function saveLedgerToLocalStorage() {
+            localStorage.setItem('party_lk_executive_ledger_state', JSON.stringify(executiveState));
+        }
+
+        // --- AUTOMATED DAILY INCEPTION LEDGER RESET CORE ---
+        function executeAutomatedMidnightLedgerEvaluation() {
+            const currentDateSignature = new Date().toDateString();
+            if (executiveState.lastResetDateString !== "" && executiveState.lastResetDateString !== currentDateSignature) {
+                console.log("Automated System Trigger: Clean operational slate initialized for calendar sequence: " + currentDateSignature);
+                performTotalLedgerZeroingAction();
+            }
+            executiveState.lastResetDateString = currentDateSignature;
+            saveLedgerToLocalStorage();
+        }
+
+        function clearDailySalesLedgerManually() {
+            if (confirm("Are you certain you want to zero all metric parameters and transaction arrays from the active display layer? This operation clears direct sales, manual inputs, and transaction line arrays.")) {
+                performTotalLedgerZeroingAction();
+                alert("The ledger configuration profile has been successfully reset.");
+            }
+        }
+
+        function performTotalLedgerZeroingAction() {
+            executiveState.customerOrdersRevenue = 0;
+            executiveState.auxiliarySales = 0;
+            executiveState.operationalCosts = 0;
+            executiveState.loggedOrders = [];
+            executiveState.manualHistory = [];
+            executiveState.lastResetDateString = new Date().toDateString();
+            
+            recalculateFinancialLedger();
+            updateOwnerTableUI();
+        }
 
         function triggerHeroCanvasAnimationLoop() {
             const canvas = document.getElementById('hero-animation-layer');
@@ -1178,7 +1316,6 @@
             }
         }
 
-        /* --- OWNER VERIFICATION SECURED PORTFOLIO ASSIGNMENTS --- */
         function appendCustomPortfolioCard() {
             if(!executiveState.authenticated) {
                 alert("Security Action Denied: Only verified administrative owners can adjust achievement work images.");
@@ -1273,7 +1410,7 @@
                 date: eventDate,
                 items: orderedItemsText,
                 paid: retailTotal,
-                status: 'Pending' // Initial state assignment default to Pending
+                status: 'Pending'
             });
 
             recalculateFinancialLedger();
@@ -1324,7 +1461,7 @@
             selectedItems.forEach((item, idx) => {
                 if(formattingRowPositionY > 260) { doc.addPage(); formattingRowPositionY = 20; }
                 doc.text(`${idx + 1}. ${item.name}`, 20, formattingRowPositionY);
-                doc.text(`LKR ${item.price.toFixed(2)}`, 170, formattingRowPositionY, { align: "right" });
+                doc.text("LKR " + item.price.toFixed(2), 170, formattingRowPositionY, { align: "right" });
                 formattingRowPositionY += 8;
             });
 
@@ -1334,7 +1471,7 @@
             doc.setFontSize(13);
             doc.text("Total Settled Gross Liability:", 120, formattingRowPositionY + 12);
             doc.setTextColor(46, 204, 113); 
-            doc.text(`LKR ${netTotal.toFixed(2)}`, 195, formattingRowPositionY + 12, { align: "right" });
+            doc.text("LKR " + netTotal.toFixed(2), 195, formattingRowPositionY + 12, { align: "right" });
 
             doc.setTextColor(154, 160, 166);
             doc.setFontSize(8);
@@ -1342,6 +1479,182 @@
             doc.text("Thank you for your business. Generated securely via Party LK Logistics Architecture.", 105, 285, { align: "center" });
 
             doc.save(`Invoice-${refID}.pdf`);
+        }
+
+        // --- ENHANCED PDF LEDGER BACKUP ENGINE WITH DESCRIPTIVE PARAMETERS ---
+        function generateLedgerBackupPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
+            const totalRevenue = executiveState.customerOrdersRevenue + executiveState.auxiliarySales;
+            const netProfit = totalRevenue - executiveState.operationalCosts;
+            const timestamp = new Date().toLocaleString();
+
+            doc.setFillColor(26, 30, 36);
+            doc.rect(0, 0, 210, 45, "F");
+
+            doc.setTextColor(241, 196, 15);
+            doc.setFont("serif", "bold");
+            doc.setFontSize(22);
+            doc.text("PARTY LK OPERATIONS LEDGER BACKUP", 15, 25);
+
+            doc.setTextColor(255, 255, 255);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9);
+            doc.text(`Generated Security Snapshot Archive: ${timestamp}`, 15, 35);
+
+            doc.setTextColor(13, 13, 13);
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("EXECUTIVE METRICS SCOREBOARD OVERVIEW", 15, 60);
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(11);
+            doc.text(`Direct Order Sales Intake:`, 15, 72);
+            doc.text(`LKR ${executiveState.customerOrdersRevenue.toFixed(2)}`, 140, 72);
+
+            doc.text(`Auxiliary Manual Log Revenue:`, 15, 80);
+            doc.text(`LKR ${executiveState.auxiliarySales.toFixed(2)}`, 140, 80);
+
+            doc.setFont("helvetica", "bold");
+            doc.text(`Combined Total Revenue Gross:`, 15, 88);
+            doc.text(`LKR ${totalRevenue.toFixed(2)}`, 140, 88);
+
+            doc.setTextColor(231, 76, 60);
+            doc.text(`Total Aggregated Processing Costs:`, 15, 96);
+            doc.text(`LKR ${executiveState.operationalCosts.toFixed(2)}`, 140, 96);
+
+            doc.setLineWidth(0.5);
+            doc.setDrawColor(42, 49, 60);
+            doc.line(15, 102, 195, 102);
+
+            if(netProfit >= 0) { doc.setTextColor(46, 204, 113); } else { doc.setTextColor(231, 76, 60); }
+            doc.setFontSize(13);
+            doc.text(`Net Operational Balance Profit:`, 15, 110);
+            doc.text(`LKR ${netProfit.toFixed(2)}`, 140, 110);
+
+            doc.setTextColor(13, 13, 13);
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("ITEMIZED TRANSACTION METRICS & DESCRIPTIONS", 15, 125);
+
+            doc.setFontSize(9);
+            doc.setLineWidth(0.2);
+            doc.line(15, 129, 195, 129);
+            
+            doc.text("Type / Ref ID", 15, 134);
+            doc.text("Target Context Description", 50, 134);
+            doc.text("Financial Delta Block", 160, 134);
+            doc.line(15, 137, 195, 137);
+
+            let rowY = 144;
+            doc.setFont("helvetica", "normal");
+
+            let logEntriesEvaluator = 0;
+
+            // Render Client Orders Tracking Arrays inside PDF Engine
+            executiveState.loggedOrders.forEach((order) => {
+                if(rowY > 270) { doc.addPage(); rowY = 25; }
+                doc.setTextColor(46, 204, 113);
+                doc.text(order.refID, 15, rowY);
+                doc.setTextColor(13, 13, 13);
+                
+                let descriptiveString = `Client: ${order.name} - Items: ${order.items}`;
+                doc.text(descriptiveString.substring(0, 60), 50, rowY);
+                doc.text(`+LKR ${order.paid.toFixed(2)}`, 160, rowY);
+                rowY += 8;
+                logEntriesEvaluator++;
+            });
+
+            // Render Auxiliary Change Records logs array with descriptive fields inside PDF Engine
+            executiveState.manualHistory.forEach((entry) => {
+                if(rowY > 270) { doc.addPage(); rowY = 25; }
+                const prefixLabel = entry.type === 'income' ? "AUX INC" : "AUX COST";
+                if(entry.type === 'income') { doc.setTextColor(46, 204, 113); } else { doc.setTextColor(231, 76, 60); }
+                
+                doc.text(prefixLabel, 15, rowY);
+                doc.setTextColor(13, 13, 13);
+                doc.text(entry.description.substring(0, 60), 50, rowY);
+                
+                const formatValueString = entry.type === 'income' ? `+LKR ${entry.amount.toFixed(2)}` : `-LKR ${entry.amount.toFixed(2)}`;
+                doc.text(formatValueString, 160, rowY);
+                rowY += 8;
+                logEntriesEvaluator++;
+            });
+
+            if(logEntriesEvaluator === 0) {
+                doc.setFont("helvetica", "italic");
+                doc.setTextColor(120, 120, 120);
+                doc.text("No active customer orders or auxiliary parameters logged in local dashboard state variables.", 20, rowY);
+            }
+
+            doc.setTextColor(154, 160, 166);
+            doc.setFontSize(8);
+            doc.setFont("helvetica", "italic");
+            doc.text("End of secure manual dashboard backup file. Treat as strictly private financial tracking documents.", 105, 285, { align: "center" });
+
+            doc.save(`Financial-Ledger-Backup-${Date.now()}.pdf`);
+        }
+
+        // --- PLAIN TEXT (.TXT) BACKUP ENGINE WITH DESCRIPTIONS ---
+        function generateLedgerBackupTXT() {
+            const totalRevenue = executiveState.customerOrdersRevenue + executiveState.auxiliarySales;
+            const netProfit = totalRevenue - executiveState.operationalCosts;
+            const timestamp = new Date().toLocaleString();
+
+            let txtContent = `========================================================\n`;
+            txtContent += `       PARTY LK - EXECUTIVE OPERATIONS LEDGER BACKUP     \n`;
+            txtContent += `========================================================\n`;
+            txtContent += `Generated On: ${timestamp}\n\n`;
+            
+            txtContent += `[FINANCIAL METRICS SCOREBOARD]\n`;
+            txtContent += `--------------------------------------------------------\n`;
+            txtContent += `Direct Client Order Revenue : LKR ${executiveState.customerOrdersRevenue.toFixed(2)}\n`;
+            txtContent += `Auxiliary Manual Revenue    : LKR ${executiveState.auxiliarySales.toFixed(2)}\n`;
+            txtContent += `Total Combined Revenue Gross: LKR ${totalRevenue.toFixed(2)}\n`;
+            txtContent += `Total Operational Costs     : LKR ${executiveState.operationalCosts.toFixed(2)}\n`;
+            txtContent += `--------------------------------------------------------\n`;
+            txtContent += `NET OPERATIONAL PROFIT      : LKR ${netProfit.toFixed(2)}\n`;
+            txtContent += `========================================================\n\n`;
+
+            txtContent += `[DETAILED INCOME BREAKDOWN]\n`;
+            txtContent += `--------------------------------------------------------\n`;
+            let incomeCount = 0;
+            // Extract from system floor sales
+            executiveState.loggedOrders.forEach(order => {
+                incomeCount++;
+                txtContent += `${incomeCount}. [Order ${order.refID}] Client: ${order.name} - Items: ${order.items} (+LKR ${order.paid.toFixed(2)})\n`;
+            });
+            // Extract from manual auxiliary entries
+            executiveState.manualHistory.forEach(entry => {
+                if (entry.type === 'income') {
+                    incomeCount++;
+                    txtContent += `${incomeCount}. [Manual Input] Description: ${entry.description} (+LKR ${entry.amount.toFixed(2)})\n`;
+                }
+            });
+            if(incomeCount === 0) txtContent += `No incoming transaction logs registered.\n`;
+            txtContent += `\n`;
+
+            txtContent += `[DETAILED COST BREAKDOWN]\n`;
+            txtContent += `--------------------------------------------------------\n`;
+            let costCount = 0;
+            executiveState.manualHistory.forEach(entry => {
+                if (entry.type === 'cost') {
+                    costCount++;
+                    txtContent += `${costCount}. [Manual Input] Description: ${entry.description} (-LKR ${entry.amount.toFixed(2)})\n`;
+                }
+            });
+            if(costCount === 0) txtContent += `No processing or material operational costs logged.\n`;
+            txtContent += `\n`;
+            txtContent += `========================= END ==========================`;
+
+            // Download Trigger Mechanics
+            const blob = new Blob([txtContent], { type: "text/plain;charset=utf-8" });
+            const tempLink = document.createElement("a");
+            tempLink.href = URL.createObjectURL(blob);
+            tempLink.download = `PartyLK-Ledger-Backup-${Date.now()}.txt`;
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
         }
 
         function toggleAuthModal(show) {
@@ -1377,18 +1690,98 @@
         function handleManualFinancials(event) {
             event.preventDefault();
             const salesInput = document.getElementById('manual-sales');
+            const salesDescInput = document.getElementById('manual-sales-desc');
             const costInput = document.getElementById('manual-cost');
+            const costDescInput = document.getElementById('manual-cost-desc');
 
             const additionalSales = parseFloat(salesInput.value) || 0;
+            const salesDesc = salesDescInput.value.trim() || "Auxiliary Income Entry";
             const additionalCost = parseFloat(costInput.value) || 0;
+            const costDesc = costDescInput.value.trim() || "Operational Cost Entry";
 
-            executiveState.auxiliarySales += additionalSales;
-            executiveState.operationalCosts += additionalCost;
+            if (additionalSales > 0) {
+                executiveState.auxiliarySales += additionalSales;
+                executiveState.manualHistory.push({ type: 'income', amount: additionalSales, description: salesDesc });
+            }
+
+            if (additionalCost > 0) {
+                executiveState.operationalCosts += additionalCost;
+                executiveState.manualHistory.push({ type: 'cost', amount: additionalCost, description: costDesc });
+            }
 
             recalculateFinancialLedger();
             
             salesInput.value = "";
+            salesDescInput.value = "";
             costInput.value = "";
+            costDescInput.value = "";
+            alert("Ledger adjustments processed accurately.");
+        }
+
+        /* --- DYNAMIC AUXILIARY LOGS TABLE MECHANICS (EDIT & DELETE INLINE) --- */
+        function renderManualLogsUI() {
+            const tbody = document.getElementById('owner-manual-logs-tbody');
+            tbody.innerHTML = "";
+
+            if (executiveState.manualHistory.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="empty-msg" style="text-align: center;">No auxiliary entries logged.</td></tr>`;
+                return;
+            }
+
+            executiveState.manualHistory.forEach((entry, index) => {
+                const isIncome = entry.type === 'income';
+                const typeLabel = isIncome ? 'Income' : 'Cost';
+                const typeColor = isIncome ? 'var(--accent-green)' : 'var(--accent-red)';
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="color: ${typeColor}; font-weight: bold;">${typeLabel}</td>
+                    <td>${entry.description}</td>
+                    <td>LKR ${entry.amount.toFixed(2)}</td>
+                    <td>
+                        <button class="btn-action btn-edit" onclick="editManualLogEntry(${index})">Edit</button>
+                        <button class="btn-action btn-delete" onclick="deleteManualLogEntry(${index})">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function editManualLogEntry(index) {
+            const entry = executiveState.manualHistory[index];
+            const newDesc = prompt(`Modify ${entry.type === 'income' ? 'Income' : 'Cost'} Description:`, entry.description);
+            if (newDesc === null) return;
+            const newAmountStr = prompt(`Modify Amount (LKR):`, entry.amount);
+            if (newAmountStr === null) return;
+            const newAmount = parseFloat(newAmountStr) || 0;
+
+            // Revert original transaction parameters out of state blocks
+            if (entry.type === 'income') {
+                executiveState.auxiliarySales -= entry.amount;
+                entry.amount = newAmount;
+                executiveState.auxiliarySales += newAmount;
+            } else {
+                executiveState.operationalCosts -= entry.amount;
+                entry.amount = newAmount;
+                executiveState.operationalCosts += newAmount;
+            }
+            entry.description = newDesc.trim() || `Modified ${entry.type} Entry`;
+
+            recalculateFinancialLedger();
+        }
+
+        function deleteManualLogEntry(index) {
+            if (confirm("Are you certain you want to remove this auxiliary entry permanently from the ledger?")) {
+                const entry = executiveState.manualHistory[index];
+                if (entry.type === 'income') {
+                    executiveState.auxiliarySales -= entry.amount;
+                } else {
+                    executiveState.operationalCosts -= entry.amount;
+                }
+                executiveState.manualHistory.splice(index, 1);
+
+                recalculateFinancialLedger();
+            }
         }
 
         function renderCatalogManagementList() {
@@ -1428,10 +1821,10 @@
             renderCatalogManagementList();
         }
 
-        // TOGGLE SYSTEM FOR EXCLUSIVE OWNER PAYMENT VERIFICATION
         function togglePaymentStatus(index) {
             const order = executiveState.loggedOrders[index];
             order.status = order.status === 'Pending' ? 'Done' : 'Pending';
+            saveLedgerToLocalStorage();
             updateOwnerTableUI();
         }
 
@@ -1525,6 +1918,10 @@
             document.getElementById('sheet-income').innerText = `LKR ${totalRevenue.toFixed(2)}`;
             document.getElementById('sheet-cost').innerText = `LKR ${executiveState.operationalCosts.toFixed(2)}`;
             document.getElementById('sheet-profit').innerText = `LKR ${netProfit.toFixed(2)}`;
+
+            // Commit modifications directly into local hardware string streams
+            saveLedgerToLocalStorage();
+            renderManualLogsUI();
         }
 
         function updateOwnerTableUI() {
@@ -1558,6 +1955,10 @@
         document.getElementById('event-date').valueAsDate = new Date();
         renderStoreCatalog();
         triggerHeroCanvasAnimationLoop();
+
+        // RUN SYSTEM REINITIALIZATION INITIALIZERS FROM DISK CONTENT CACHE ON LOAD RUNS
+        executeAutomatedMidnightLedgerEvaluation();
+        recalculateFinancialLedger();
     </script>
 </body>
 </html>
